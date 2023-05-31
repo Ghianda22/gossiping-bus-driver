@@ -31,11 +31,12 @@ export default class BusDriver {
     }
 
 
-    gossipWith(busDriver1: BusDriver) {
+    gossipWith(busDriver1: BusDriver): number {
         for (let stop = 0; stop < MINUTES_OF_WORK_PER_DAY; stop++) {
             if(busDriver1.dayRoute[stop] == this.dayRoute[stop]){
                 busDriver1.gossipNet.add(this.id);
                 this.gossipNet.add(busDriver1.id);
+                return stop + 1;
             }
         }
     }
