@@ -28,9 +28,14 @@ test('Given two day routes, the first time the stops coincide then should be rec
     expect(actualGossipNet1).toEqual(expectedGossipNet1)
 })
 
+test('', () => {
 
+})
 /**
- * Given a route, the total day of work should be that route repeated to reach 480 minutes of driving
- * Given two day routes, the first time the stops coincide then should be counted as a gossip exchange
- * Given multiple day routes,
+ * [X] Given a route, the total day of work should be that route repeated to reach 480 minutes of driving
+ * [X] Given two day routes, the first time the stops coincide then should be counted as a gossip exchange
+ * [-] Given two day routes, the stops needed to exchange gossip should be counted
+ * [-] If two bus drivers gossip more than once and one of them gets new gossips, the gossip network should be updated
+ * [-] Given multiple day routes, the stops needed to exchange all gossip between all bus drivers should be counted and returned
+ * [-] Given multiple day routes, if not every bus driver can know all gossip should return "never"
  * */
