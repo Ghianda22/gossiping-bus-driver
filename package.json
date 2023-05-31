@@ -9,5 +9,8 @@
   },
   "scripts": {
     "test": "jest"
+  },
+  "dependencies": {
+    "uuid": "^9.0.0"
   }
 }
