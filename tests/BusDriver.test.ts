@@ -14,11 +14,15 @@ test('Given two day routes, the first time the stops coincide then should be rec
     //given
     const busDriver0: BusDriver = new BusDriver([3,1,2,3]);
     const busDriver1: BusDriver = new BusDriver([3,2,3,1]);
-    const expectedGossipNet0: Set<string> = new Set<string>([busDriver1.id]);
-    const expectedGossipNet1: Set<string> = new Set<string>([busDriver0.id]);
+    const gossipId0: string = busDriver0.gossipNet.values().next().value;
+    const gossipId1: string = busDriver1.gossipNet.values().next().value;
+    const expectedGossipNet0: Set<string> = new Set<string>([gossipId0, gossipId1]);
+    const expectedGossipNet1: Set<string> = new Set<string>([gossipId1, gossipId0]);
 
     //when
     busDriver0.gossipWith(busDriver1);
+    console.log(busDriver0.gossipNet)
+    console.log(busDriver1.gossipNet)
     const actualGossipNet0: Set<string> = busDriver0.gossipNet;
     const actualGossipNet1: Set<string> = busDriver1.gossipNet;
 
