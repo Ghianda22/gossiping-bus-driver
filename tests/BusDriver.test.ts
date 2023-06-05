@@ -79,7 +79,20 @@ test('Given multiple day routes, the stops needed to exchange all gossip between
     const expectedSteps: number = 5;
 
     //when
-    const actualSteps: number| null = BusDriverUtils.stopsRequiredForDailyGossip(busDrivers);
+    const actualSteps: number | string = BusDriverUtils.stopsRequiredForDailyGossip(busDrivers);
+
+    //then
+    expect(actualSteps).toEqual(expectedSteps);
+})
+
+test('Given multiple day routes, if not every bus driver can know all gossip should return "never"', () => {
+    //given
+    const dayRoutes: string = "2 1 2\n5 2 8";
+    const busDrivers: BusDriver[] = BusDriverUtils.createBusDriversFromString(dayRoutes);
+    const expectedSteps: string = "never";
+
+    //when
+    const actualSteps: number | string = BusDriverUtils.stopsRequiredForDailyGossip(busDrivers);
 
     //then
     expect(actualSteps).toEqual(expectedSteps);
@@ -90,5 +103,5 @@ test('Given multiple day routes, the stops needed to exchange all gossip between
  * [X] If two bus drivers gossip more than once and one of them gets new gossips, the gossip network should be updated
  * [X] Given two day routes, the stops needed to exchange gossip should be counted
  * [X] Given multiple day routes, the stops needed to exchange all gossip between all bus drivers should be counted and returned
- * [-] Given multiple day routes, if not every bus driver can know all gossip should return "never"
+ * [X] Given multiple day routes, if not every bus driver can know all gossip should return "never"
  * */

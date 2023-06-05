@@ -25,7 +25,7 @@ export default class BusDriverUtils {
      *  if they are at the same stop at the same time, the gossips are exchanged
      *  then their gossip net is checked to see if they have all gossips
      * */
-    static stopsRequiredForDailyGossip(busDriver: BusDriver[]): number{
+    static stopsRequiredForDailyGossip(busDriver: BusDriver[]): number | string{
         const busDriversUpToDate: Set<BusDriver> = new Set();
         const numberOfBusDrivers:  number = busDriver.length;
 
@@ -49,6 +49,6 @@ export default class BusDriverUtils {
             }
         }
 
-        return null;
+        return "never";
     }
 }
