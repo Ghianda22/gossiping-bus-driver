@@ -1,5 +1,9 @@
 import BusDriver from "../src/BusDriver";
 
+function getFirstGossipOf (busDriver: BusDriver): string {
+    return busDriver.gossipNet.values().next().value;
+}
+
 test('Given a route, the total day of work should be that route repeated to reach 480 minutes of driving', () => {
     //given
     let busDriver: BusDriver = new BusDriver([3,1,2,3]);
@@ -14,8 +18,8 @@ test('Given two day routes, the first time the stops coincide then should be rec
     //given
     const busDriver0: BusDriver = new BusDriver([3,1,2,3]);
     const busDriver1: BusDriver = new BusDriver([3,2,3,1]);
-    const gossipId0: string = busDriver0.gossipNet.values().next().value;
-    const gossipId1: string = busDriver1.gossipNet.values().next().value;
+    const gossipId0: string = getFirstGossipOf(busDriver0);
+    const gossipId1: string = getFirstGossipOf(busDriver1);
     const expectedGossipNet0: Set<string> = new Set<string>([gossipId0, gossipId1]);
     const expectedGossipNet1: Set<string> = new Set<string>([gossipId1, gossipId0]);
 
@@ -37,7 +41,10 @@ test('If two bus drivers gossip more than once and one of them gets new gossips 
     const busDriver0: BusDriver = new BusDriver([3,1,2,3]);
     const busDriver1: BusDriver = new BusDriver([3,2,3,1]);
     const busDriver2: BusDriver = new BusDriver([4,2,3,4,5]);
-    const expectedGossipNet0: Set<string> = new Set<string>([busDriver0.id, busDriver1.id, busDriver2.id]);
+    const gossipId0: string = getFirstGossipOf(busDriver0);
+    const gossipId1: string = getFirstGossipOf(busDriver1);
+    const gossipId2: string = getFirstGossipOf(busDriver2);
+    const expectedGossipNet0: Set<string> = new Set<string>([gossipId0, gossipId1, gossipId2]);
 
     //when
     busDriver0.gossipWith(busDriver1);
