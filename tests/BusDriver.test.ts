@@ -1,4 +1,5 @@
 import BusDriver from "../src/BusDriver";
+import BusDriverUtils from "../src/BusDriverUtils";
 
 function getFirstGossipOf (busDriver: BusDriver): string {
     return busDriver.gossipNet.values().next().value;
@@ -71,11 +72,23 @@ test('Given two day routes, the stops needed to exchange gossip should be counte
     expect(actualStopsNeededToGossip).toEqual(expectedStopsNeededToGossip);
 })
 
+test('Given multiple day routes, the stops needed to exchange all gossip between all bus drivers should be counted and returned', () => {
+    //given
+    const dayRoutes: string = "3 1 2 3\n3 2 3 1\n4 2 3 4 5";
+    const busDrivers: BusDriver[] = BusDriverUtils.createBusDriversFromString(dayRoutes);
+    const expectedSteps: number = 5;
+
+    //when
+    const actualSteps: number| null = BusDriverUtils.stopsRequiredForDailyGossip(busDrivers);
+
+    //then
+    expect(actualSteps).toEqual(expectedSteps);
+})
 /**
  * [X] Given a route, the total day of work should be that route repeated to reach 480 minutes of driving
  * [X] Given two day routes, the first time the stops coincide then should be counted as a gossip exchange
- * [-] If two bus drivers gossip more than once and one of them gets new gossips, the gossip network should be updated
+ * [X] If two bus drivers gossip more than once and one of them gets new gossips, the gossip network should be updated
  * [X] Given two day routes, the stops needed to exchange gossip should be counted
- * [-] Given multiple day routes, the stops needed to exchange all gossip between all bus drivers should be counted and returned
+ * [X] Given multiple day routes, the stops needed to exchange all gossip between all bus drivers should be counted and returned
  * [-] Given multiple day routes, if not every bus driver can know all gossip should return "never"
  * */

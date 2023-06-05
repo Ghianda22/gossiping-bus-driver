@@ -42,4 +42,9 @@ export default class BusDriver {
             }
         }
     }
+
+    exchangeGossipWith(otherBusDriver: BusDriver): void{
+        otherBusDriver.gossipNet.forEach(gossipId => this.gossipNet.add(gossipId));
+        this.gossipNet.forEach(gossipId => otherBusDriver.gossipNet.add(gossipId));
+    }
 }
